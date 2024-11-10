@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private int score;
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +28,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void CreateEnemy()
     {
-        Instantiate(enemy, new Vector3(Random.Range(-9f, 9f), 7.5f, 0), Quaternion.identity);
+        Instantiate(enemy, new Vector3(Random.Range(-9f, 9f), Random.Range(-3f, 5f), 0), Quaternion.identity);
     }
 
     void CreateSky()
@@ -43,10 +44,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EarnScore(int howMuch) 
-    {  
+    public void EarnScore(int howMuch)
+    {
         score = score + howMuch;
         scoreText.text = "Score: " + score;
+    }
+    public void SetLivesCount(int Lives)
+    {
+        livesText.text = "Lives: " + Lives;
     }
 
 }

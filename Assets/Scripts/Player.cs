@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,8 @@ public class Player : MonoBehaviour
 
     public GameObject explosion;
     public GameObject bullet;
-    private int lives;
+
+    public int lives;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
         horizontalScreenLimit = 11.5f;
         verticalScreenLimit = 7.5f;
         lives = 3;
+        FindObjectOfType<GameManager>().SetLivesCount(lives);
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(bullet, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         }
@@ -60,10 +63,13 @@ public class Player : MonoBehaviour
         //lives = lives - 1;
         //lives -= 1;
         lives--;
+        FindObjectOfType<GameManager>().SetLivesCount(lives);
+
         if (lives == 0)
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
+
     }
 }
